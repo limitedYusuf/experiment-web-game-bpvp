@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Tebak Warna</title>
+      <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="style.css">
+   </head>
+
+   <body class="bg-gray-200 min-h-screen flex items-center justify-center">
+      <div id="app" class="text-center">
+         <div v-if="!gameStarted">
+            <h1 class="text-3xl font-semibold mb-4">Selamat Datang di Tebak Warna</h1>
+            <button @click="startGame"
+               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Mulai Game</button>
+         </div>
+
+         <div v-else>
+            <h1 class="text-3xl font-semibold mb-4">Tebak Warna</h1>
+
+            <div class="mb-4">
+               <p class="text-xl" v-if="question">{{ question }}</p>
+            </div>
+
+            <div class="mb-4 color-grid">
+               <div v-for="(color, index) in colors" :key="index">
+                  <button @click="selectColor(color)" :style="{ backgroundColor: color }" class="w-16 h-16 rounded-full"></button>
+               </div>
+            </div>
+
+            <div>
+               <p class="text-lg" v-if="resultMessage">{{ resultMessage }}</p>
+               <p class="text-lg mt-4">Skor Anda: {{ score }}</p>
+            </div>
+
+            <div class="text-lg mt-4" v-if="timer > 0">Sisa waktu: {{ timer }} detik</div>
+         </div>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+      <script src="app.js"></script>
+   </body>
+
+</html>
