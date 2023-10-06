@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Logika Matematika</title>
+      <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+   </head>
+
+   <body class="bg-gray-200 min-h-screen flex items-center justify-center">
+      <div id="app" class="text-center">
+         <h1 class="text-3xl font-semibold mb-4" v-if="!gameStarted">Logika Matematika</h1>
+
+         <button v-if="!gameStarted" @click="startGame"
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-4">Mulai Game</button>
+
+         <div v-if="gameStarted">
+            <div class="mb-4">
+               <p class="text-2xl" v-if="question">{{ question }}</p>
+            </div>
+
+            <div class="mb-4">
+               <label for="answer">Jawaban:</label>
+               <input v-model="userAnswer" id="answer" class="px-2 py-1 border rounded">
+            </div>
+
+            <div>
+               <button @click="checkAnswer"
+                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Periksa</button>
+            </div>
+
+            <div class="mt-4">
+               <p class="text-lg" v-if="resultMessage">{{ resultMessage }}</p>
+            </div>
+
+            <div class="mt-4">
+               <p class="text-lg" v-if="timer > 0">Sisa waktu: {{ timer }} detik</p>
+               <p class="text-lg" v-else>Jawaban Benar: {{ correctCount }}, Jawaban Salah: {{ wrongCount }}</p>
+            </div>
+         </div>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+      <script src="app.js"></script>
+   </body>
+
+</html>
