@@ -1,0 +1,15 @@
+.hole {
+   width: 100px;
+   height: 100px;
+   background-color: #4CAF50;
+   border: 2px solid #333;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+   transition: background-color 0.3s;
+}
+
+.mole {
+   background-color: #FF5722;
+}
