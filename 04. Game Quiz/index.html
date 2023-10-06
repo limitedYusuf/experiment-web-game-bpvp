@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Quiz Game</title>
+      <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+   </head>
+
+   <body class="bg-gray-200 min-h-screen flex items-center justify-center">
+      <div id="app" class="text-center">
+         <h1 class="text-3xl font-semibold mb-4">Quiz Game</h1>
+         <div v-if="!gameStarted">
+            <button @click="startGame"
+               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Mulai Permainan</button>
+         </div>
+         <div v-else>
+            <template v-if="currentIndex < questions.length">
+               <h2 class="text-2xl font-semibold mb-2">{{ currentIndex + 1 }}. {{ questions[currentIndex].question }}
+               </h2>
+               <div class="grid grid-cols-2 gap-4 mt-4">
+                  <button v-for="(option, index) in questions[currentIndex].options" :key="index"
+                     @click="answerQuestion(option)" :class="{
+                            'bg-blue-500 hover:bg-blue-700': selectedOption === option,
+                            'bg-red-300 hover:bg-gray-400': selectedOption !== option
+                        }" class="text-white font-bold py-2 px-4 rounded">{{ option }}</button>
+               </div>
+               <div class="mt-4">
+                  <button @click="nextQuestion"
+                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                     :disabled="selectedOption === ''">Selanjutnya</button>
+               </div>
+            </template>
+            <template v-else>
+               <h2 class="text-2xl font-semibold mb-4">Hasil:</h2>
+               <p class="text-xl">Benar: {{ correctAnswers }} dari {{ questions.length }} soal</p>
+               <button @click="restartGame"
+                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">Ulangi
+                  Permainan</button>
+            </template>
+         </div>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+      <script src="app.js"></script>
+   </body>
+
+</html>

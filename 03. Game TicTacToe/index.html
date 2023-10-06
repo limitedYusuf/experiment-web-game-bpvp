@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Tic-Tac-Toe</title>
+      <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+   </head>
+
+   <body class="bg-gray-200 min-h-screen flex items-center justify-center">
+      <div id="app" class="text-center">
+         <h1 class="text-3xl font-semibold mb-4">Tic-Tac-Toe</h1>
+         <div v-if="!gameStarted">
+            <p class="text-xl mb-2">Pilih pemain pertama:</p>
+            <button @click="startGame('X')"
+               class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4">X</button>
+            <button @click="startGame('O')"
+               class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">O</button>
+         </div>
+         <div v-else>
+            <p class="text-xl mb-2">Giliran Pemain: {{ currentPlayer }}</p>
+            <div class="grid grid-cols-3 gap-4 mb-4">
+               <button v-for="(cell, index) in board" :key="index" @click="makeMove(index)"
+                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 rounded">
+                  {{ cell }}
+               </button>
+            </div>
+            <p class="text-2xl font-semibold">{{ gameStatus }}</p>
+            <button @click="restartGame"
+               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">Ulangi
+               Permainan</button>
+         </div>
+         <div v-if="gameWon" class="mt-4">
+            <p class="text-2xl text-green-500 font-semibold">Anda Menang!</p>
+         </div>
+         <div v-if="gameOver" class="mt-4">
+            <p class="text-2xl text-red-500 font-semibold">Game Over - Permainan Seri!</p>
+         </div>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+      <script src="app.js"></script>
+   </body>
+
+</html>

@@ -6,69 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Game Memori</title>
       <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
-      <style>
-         .card {
-            width: 120px;
-            height: 160px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f2f2f2;
-            font-size: 24px;
-            font-weight: bold;
-            user-select: none;
-            transition: background-color 0.5s, color 0.5s;
-         }
-
-         .card.flipped {
-            background-color: #fff;
-         }
-
-         .card.matched {
-            background-color: #4CAF50;
-            color: #fff;
-            cursor: default;
-         }
-
-         .rainbow-text {
-            animation: rainbow 2s linear infinite;
-         }
-
-         @keyframes rainbow {
-            0% {
-               color: red;
-            }
-
-            14% {
-               color: orange;
-            }
-
-            28% {
-               color: yellow;
-            }
-
-            42% {
-               color: green;
-            }
-
-            57% {
-               color: blue;
-            }
-
-            71% {
-               color: indigo;
-            }
-
-            85% {
-               color: violet;
-            }
-
-            100% {
-               color: red;
-            }
-         }
-      </style>
+      <link rel="stylesheet" href="style.css">
    </head>
 
    <body class="bg-gray-200 min-h-screen flex items-center justify-center">
@@ -110,73 +48,7 @@
       </div>
 
       <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
-      <script>
-         new Vue({
-            el: "#app",
-            data: {
-               cards: [],
-               flippedCards: [],
-               canFlip: true,
-               gameWon: false,
-               startTime: 0,
-               endTime: 0,
-               gameDuration: 0
-            },
-            methods: {
-               startGame(level) {
-                  this.startTime = new Date().getTime();
-
-                  let symbols = [];
-                  if (level === 'easy') {
-                     symbols = ["A", "B", "C", "D"];
-                  } else if (level === 'medium') {
-                     symbols = ["A", "B", "C", "D", "E", "F"];
-                  } else if (level === 'hard') {
-                     symbols = ["A", "B", "C", "D", "E", "F", "G", "H"];
-                  }
-
-                  const shuffledSymbols = symbols.concat(symbols).sort(() => Math.random() - 0.5);
-                  this.cards = shuffledSymbols.map(value => ({
-                     value,
-                     flipped: false,
-                     matched: false
-                  }));
-                  this.flippedCards = [];
-                  this.canFlip = true;
-                  this.gameWon = false;
-               },
-               flipCard(index) {
-                  if (!this.canFlip || this.cards[index].flipped || this.cards[index].matched) return;
-                  this.cards[index].flipped = true;
-                  this.flippedCards.push(index);
-
-                  if (this.flippedCards.length === 2) {
-                     const [index1, index2] = this.flippedCards;
-                     if (this.cards[index1].value === this.cards[index2].value) {
-                        this.cards[index1].matched = true;
-                        this.cards[index2].matched = true;
-                        if (this.cards.every(card => card.matched)) {
-                           this.endTime = new Date().getTime();
-                           this.gameDuration = ((this.endTime - this.startTime) / 60000).toFixed(2);
-                           this.gameWon = true;
-                        }
-                     }
-
-                     this.canFlip = false;
-                     setTimeout(() => {
-                        this.cards[index1].flipped = false;
-                        this.cards[index2].flipped = false;
-                        this.flippedCards = [];
-                        this.canFlip = true;
-                     }, 1000);
-                  }
-               },
-               restartGame() {
-                  this.startGame();
-               }
-            }
-         });
-      </script>
+      <script src="app.js"></script>
    </body>
 
 </html>
