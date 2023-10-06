@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Tebak Angka</title>
+      <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+   </head>
+
+   <body class="bg-gray-200 min-h-screen flex items-center justify-center">
+      <div id="app" class="text-center">
+         <h1 class="text-3xl font-semibold mb-4">Tebak Angka</h1>
+         <div v-if="!gameStarted">
+            <button @click="startGame"
+               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Mulai
+               Permainan</button>
+         </div>
+         <div v-else>
+            <p class="text-xl mb-2">Tebak angka antara 1 dan 100:</p>
+            <input v-model.number="guess" type="number" class="border rounded py-2 px-4 mb-4" :disabled="gameOver">
+            <button @click="checkGuess" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+               :disabled="gameOver">Periksa</button>
+            <p class="text-xl mt-4" v-if="message">{{ message }}</p>
+            <button @click="restartGame"
+               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">Ulangi
+               Permainan</button>
+         </div>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+      <script src="app.js"></script>
+   </body>
+
+</html>
